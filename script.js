@@ -97,3 +97,26 @@ restartButton.addEventListener("click", restartExperience);
 whatsappButton.addEventListener("click", confirmByWhatsApp);
 
 applyEventDetails();
+const musicaFondo = document.getElementById("musica-fondo");
+
+// Intentar reproducir la música al cargar la página
+window.addEventListener("load", () => {
+  if (!musicaFondo) return;
+
+  musicaFondo.volume = 0.35;
+
+  musicaFondo.play().catch(() => {
+    // Si el navegador bloquea el autoplay,
+    // esperamos la primera interacción del usuario.
+  });
+});
+
+// Iniciar la música con la primera interacción
+function iniciarMusica() {
+  if (!musicaFondo || !musicaFondo.paused) return;
+
+  musicaFondo.play().catch(() => {});
+}
+
+document.addEventListener("click", iniciarMusica, { once: true });
+document.addEventListener("touchstart", iniciarMusica, { once: true });
