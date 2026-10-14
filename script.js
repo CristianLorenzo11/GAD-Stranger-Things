@@ -12,8 +12,8 @@
 // ==========================================
 
 const CONFIG = {
-  EVENT_DATE: "",       // Ejemplo: "Sábado 14 de noviembre de 2026"
-  EVENT_TIME: "",       // Ejemplo: "20:30 h"
+  EVENT_DATE: "20 DE DICIEMBRE ",       // Ejemplo: "Sábado 14 de noviembre de 2026"
+  EVENT_TIME: "20 HS ",       // Ejemplo: "20:30 h"
   WHATSAPP_PHONE: "5493755636803"
 };
 
