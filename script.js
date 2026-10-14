@@ -1,15 +1,25 @@
+
 /*
   GAD · Invitación interactiva
+
   Antes de publicar:
   1) Completá EVENT_DATE y EVENT_TIME cuando se confirmen.
-  2) Completá WHATSAPP_PHONE con el número del organizador, incluyendo país y área,
-     solo números, sin +, espacios ni guiones. Ejemplo argentino: 5493764000000.
+  2) El WhatsApp de GAD ya está configurado.
 */
+
+// ==========================================
+// CONFIGURACIÓN DE LA GALA
+// ==========================================
+
 const CONFIG = {
   EVENT_DATE: "",       // Ejemplo: "Sábado 14 de noviembre de 2026"
   EVENT_TIME: "",       // Ejemplo: "20:30 h"
-  WHATSAPP_PHONE: ""    // Número del organizador. Dejar vacío para que se solicite al tocar.
+  WHATSAPP_PHONE: "5493755636803"
 };
+
+// ==========================================
+// ELEMENTOS DE LA PÁGINA
+// ==========================================
 
 const introScreen = document.getElementById("introScreen");
 const invitation = document.getElementById("invitation");
@@ -17,44 +27,101 @@ const enterButton = document.getElementById("enterButton");
 const restartButton = document.getElementById("restartButton");
 const whatsappButton = document.getElementById("whatsappButton");
 const toast = document.getElementById("toast");
+
 let toastTimeout;
 
+// ==========================================
+// MENSAJES Y NOTIFICACIONES
+// ==========================================
+
 function showToast(message) {
+  if (!toast) return;
+
   toast.textContent = message;
   toast.classList.add("show");
+
   clearTimeout(toastTimeout);
-  toastTimeout = setTimeout(() => toast.classList.remove("show"), 4200);
+
+  toastTimeout = setTimeout(() => {
+    toast.classList.remove("show");
+  }, 4200);
 }
+
+// ==========================================
+// DATOS DEL EVENTO
+// ==========================================
 
 function applyEventDetails() {
-  document.getElementById("eventDate").textContent = CONFIG.EVENT_DATE.trim() || "A confirmar";
-  document.getElementById("eventTime").textContent = CONFIG.EVENT_TIME.trim() || "A confirmar";
+  const eventDate = document.getElementById("eventDate");
+  const eventTime = document.getElementById("eventTime");
+
+  if (eventDate) {
+    eventDate.textContent = CONFIG.EVENT_DATE.trim() || "A confirmar";
+  }
+
+  if (eventTime) {
+    eventTime.textContent = CONFIG.EVENT_TIME.trim() || "A confirmar";
+  }
 }
 
+// ==========================================
+// ENTRADA A LA INVITACIÓN
+// ==========================================
+
 function enterExperience() {
+  if (!enterButton || !introScreen || !invitation) return;
+
   enterButton.disabled = true;
   introScreen.classList.add("glitch");
+
   window.setTimeout(() => {
     introScreen.classList.add("hidden");
     invitation.classList.remove("hidden");
-    window.scrollTo({ top: 0, behavior: "instant" });
+
+    window.scrollTo({
+      top: 0,
+      behavior: "instant"
+    });
+
     observeRevealElements();
   }, 550);
 }
 
+// ==========================================
+// REINICIAR LA EXPERIENCIA
+// ==========================================
+
 function restartExperience() {
+  if (!invitation || !introScreen || !enterButton) return;
+
   invitation.classList.add("hidden");
   introScreen.classList.remove("hidden", "glitch");
-  window.scrollTo({ top: 0, behavior: "smooth" });
+
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
+
   enterButton.disabled = false;
 }
 
+// ==========================================
+// ANIMACIONES DE APARICIÓN
+// ==========================================
+
 function observeRevealElements() {
+  if (!invitation) return;
+
   const elements = invitation.querySelectorAll(".reveal");
+
   if (!("IntersectionObserver" in window)) {
-    elements.forEach(el => el.classList.add("visible"));
+    elements.forEach(element => {
+      element.classList.add("visible");
+    });
+
     return;
   }
+
   const observer = new IntersectionObserver(entries => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
@@ -62,61 +129,97 @@ function observeRevealElements() {
         observer.unobserve(entry.target);
       }
     });
-  }, { threshold: 0.12 });
-  elements.forEach(el => observer.observe(el));
+  }, {
+    threshold: 0.12
+  });
+
+  elements.forEach(element => {
+    observer.observe(element);
+  });
 }
+
+// ==========================================
+// WHATSAPP
+// ==========================================
 
 function normalizePhone(phone) {
   return phone.replace(/\D/g, "");
 }
 
 function confirmByWhatsApp() {
-  let phone = CONFIG.WHATSAPP_PHONE;
-  if (!phone) {
-    phone = window.prompt(
-      "Ingresá el WhatsApp de GAD con código de país y área, solo números. Ejemplo de formato argentino: 5493764000000"
-    );
-    if (phone === null) return;
-  }
+  const telefono = normalizePhone(CONFIG.WHATSAPP_PHONE);
 
-  phone = normalizePhone(phone);
-  if (phone.length < 10) {
-    showToast("El número parece incompleto. Revisá el código de país y de área.");
+  const mensaje =
+    "¡Hola! Quiero ser parte de la gala de GAD. 🎭✨";
+
+  if (!telefono || telefono.length < 10) {
+    showToast("El número de WhatsApp no es válido. Revisá la configuración.");
     return;
   }
 
-  const date = CONFIG.EVENT_DATE.trim() || "fecha a confirmar";
-  const time = CONFIG.EVENT_TIME.trim() || "horario a confirmar";
-  const message = `¡Hola, GAD! Quiero confirmar mi asistencia a la Gala de Gimnasia Aeróbica. ¡Tengo muchas ganas de vivir esta noche épica!%0A%0AFecha: ${date}%0AHorario: ${time}%0ALugar: Complejo Polideportivo de San Javier.%0A%0A¡Muchas gracias!`;
-  const url = `https://wa.me/${phone}?text=${message}`;
+  const url =
+    `https://wa.me/${telefono}?text=${encodeURIComponent(mensaje)}`;
+
   window.open(url, "_blank", "noopener,noreferrer");
 }
 
-enterButton.addEventListener("click", enterExperience);
-restartButton.addEventListener("click", restartExperience);
-whatsappButton.addEventListener("click", confirmByWhatsApp);
+// ==========================================
+// MÚSICA DE FONDO
+// ==========================================
 
-applyEventDetails();
 const musicaFondo = document.getElementById("musica-fondo");
 
-// Intentar reproducir la música al cargar la página
-window.addEventListener("load", () => {
-  if (!musicaFondo) return;
+function iniciarMusica() {
+  if (!musicaFondo || !musicaFondo.paused) return;
 
   musicaFondo.volume = 0.35;
 
   musicaFondo.play().catch(() => {
-    // Si el navegador bloquea el autoplay,
-    // esperamos la primera interacción del usuario.
+    // El navegador puede bloquear la reproducción automática.
+    // Se volverá a intentar con una interacción del usuario.
   });
-});
-
-// Iniciar la música con la primera interacción
-function iniciarMusica() {
-  if (!musicaFondo || !musicaFondo.paused) return;
-
-  musicaFondo.play().catch(() => {});
 }
 
-document.addEventListener("click", iniciarMusica, { once: true });
-document.addEventListener("touchstart", iniciarMusica, { once: true });
+// Intentar reproducir al cargar la página.
+if (musicaFondo) {
+  musicaFondo.volume = 0.35;
+
+  window.addEventListener("load", () => {
+    iniciarMusica();
+  });
+}
+
+// Iniciar la música si el navegador bloqueó el autoplay.
+document.addEventListener("click", iniciarMusica, {
+  once: true
+});
+
+document.addEventListener("touchstart", iniciarMusica, {
+  once: true,
+  passive: true
+});
+
+// ==========================================
+// EVENTOS DE LOS BOTONES
+// ==========================================
+
+// Abrir la invitación.
+if (enterButton) {
+  enterButton.addEventListener("click", enterExperience);
+}
+
+// Reiniciar la invitación.
+if (restartButton) {
+  restartButton.addEventListener("click", restartExperience);
+}
+
+// Enviar al usuario a WhatsApp.
+if (whatsappButton) {
+  whatsappButton.addEventListener("click", confirmByWhatsApp);
+}
+
+// ==========================================
+// INICIALIZACIÓN
+// ==========================================
+
+applyEventDetails();
