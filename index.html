@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#090609">
+  <meta name="description" content="Invitación interactiva a la Gala de Gimnasia Aeróbica de GAD, en el Complejo Polideportivo de San Javier.">
+  <title>GAD | Gala de Gimnasia Aeróbica</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="noise" aria-hidden="true"></div>
+  <div class="scanlines" aria-hidden="true"></div>
+  <div class="ambient ambient-one" aria-hidden="true"></div>
+  <div class="ambient ambient-two" aria-hidden="true"></div>
+
+  <main>
+    <section class="intro-screen" id="introScreen" aria-labelledby="introTitle">
+      <div class="signal">
+        <span class="signal-dot"></span>
+        TRANSMISIÓN DETECTADA <span class="signal-separator">/</span> GAD
+      </div>
+      <div class="intro-art" aria-hidden="true">
+        <div class="portal portal-outer"></div>
+        <div class="portal portal-middle"></div>
+        <div class="portal portal-inner"></div>
+        <div class="portal-core"></div>
+        <span class="particle p1"></span><span class="particle p2"></span>
+        <span class="particle p3"></span><span class="particle p4"></span>
+        <span class="particle p5"></span><span class="particle p6"></span>
+      </div>
+      <p class="eyebrow">SEÑAL EN VIVO · GAD PRESENTA</p>
+      <h1 id="introTitle">PREPARATE PARA<br><span>UNA NOCHE ÉPICA</span></h1>
+      <p class="intro-copy">Las luces se encienden. La energía despierta.<br>El escenario está a punto de temblar.</p>
+      <button class="primary-button" id="enterButton" type="button">
+        <span class="button-mark" aria-hidden="true">↗</span>
+        ABRIR EL PORTAL
+      </button>
+      <p class="microcopy">TOCÁ PARA DESCUBRIR LA TRANSMISIÓN</p>
+    </section>
+
+    <section class="invitation hidden" id="invitation" aria-labelledby="eventTitle">
+      <header class="topline">
+        <span class="brand-mark">GAD<span class="brand-dot">.</span></span>
+        <span class="classified">EXPEDIENTE Nº 011-GAD</span>
+      </header>
+
+      <div class="hero">
+        <div class="hero-grid" aria-hidden="true"></div>
+        <p class="eyebrow reveal">UNA EXPERIENCIA FUERA DE ESTE MUNDO</p>
+        <div class="title-frame reveal">
+          <p class="series-label">GAD PRESENTA</p>
+          <h2 class="series-title">STRANGER<br><span>THINGS</span></h2>
+          <div class="title-rule"><span></span><span></span><span></span></div>
+        </div>
+        <div class="event-heading reveal">
+         
+          <h1 id="eventTitle">GALA DE<br>GIMNASIA AERÓBICA</h1>
+          <p class="hero-description">No venís solamente a mirar.<br><strong>Venís a sentir cada segundo.</strong></p>
+         <h2 class="event-kicker">UNA NOCHE · UNA SOLA ENERGÍA · UN RECUERDO PARA SIEMPRE</h2>
+        </div>
+        
+          <div class="spotlight spotlight-left" aria-hidden="true"></div>
+          <div class="spotlight spotlight-right" aria-hidden="true"></div>
+          <div class="stage-ring ring-one" aria-hidden="true"></div>
+          <div class="stage-ring ring-two" aria-hidden="true"></div>
+           <defs>
+              <linearGradient id="dancerGradient" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="#8CF7FF"/>
+                <stop offset="48%" stop-color="#D86CFF"/>
+                <stop offset="100%" stop-color="#FFB15E"/>
+              </linearGradient>
+              <filter id="dancerGlow" x="-60%" y="-60%" width="220%" height="220%">
+                <feGaussianBlur stdDeviation="5" result="blur"/>
+                <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+              </filter>
+            </defs>
+            <g fill="none" stroke="url(#dancerGradient)" stroke-linecap="round" stroke-linejoin="round" filter="url(#dancerGlow)">
+              <!-- arms in an expressive, extended pose -->
+              <path d="M142 112 Q111 91 88 69 Q74 55 61 39" stroke-width="12"/>
+              <path d="M157 111 Q186 87 207 63 Q220 48 239 43" stroke-width="12"/>
+              <!-- torso -->
+              <path d="M143 104 Q137 126 146 149 Q152 163 160 174" stroke-width="20"/>
+              <path d="M144 132 Q157 142 174 138" stroke-width="13"/>
+              <!-- long extended legs -->
+              <path d="M155 169 Q135 202 117 225 Q99 247 74 258" stroke-width="15"/>
+              <path d="M160 172 Q184 196 196 222 Q207 243 232 260" stroke-width="15"/>
+              <!-- pointed feet -->
+              <path d="M75 258 Q62 264 48 261" stroke-width="8"/>
+              <path d="M232 260 Q245 264 257 276" stroke-width="8"/>
+              <!-- hands -->
+              <path d="M61 39 l-8 -12 M239 43 l13 -5" stroke-width="6"/>
+            </g>
+            <circle cx="151" cy="78" r="17" fill="url(#dancerGradient)" filter="url(#dancerGlow)"/>
+            <path d="M136 91 Q151 99 166 91 L174 115 Q153 129 132 115 Z" fill="#170F28" stroke="url(#dancerGradient)" stroke-width="3"/>
+          </svg>
+          <div class="stage-floor" aria-hidden="true"></div>
+          <span class="stage-caption">ENERGÍA · PASIÓN · ESPECTÁCULO</span>
+        </div>
+        <div class="hero-bottom reveal">
+          <span>EL OTRO LADO TE ESPERA</span>
+          <span class="crosshair" aria-hidden="true">✳</span>
+          <span>UNA NOCHE · UN ESCENARIO</span>
+        </div>
+      </div>
+
+      <section class="details-section reveal" aria-labelledby="detailsTitle">
+        <div class="section-index">01 <span>/ EL GRAN ENCUENTRO</span></div>
+        <h2 id="detailsTitle">UNA NOCHE<br><em>PARA RECORDAR.</em></h2>
+        <p class="details-intro">Una gala, un escenario y todo el talento de nuestras gimnastas. Vení a ser parte de una experiencia que se vive con el corazón acelerado.</p>
+        <div class="details-card">
+          <div class="detail-row">
+            <span class="detail-icon" aria-hidden="true">◷</span>
+            <div><span class="detail-label">FECHA</span><strong id="eventDate">A confirmar</strong></div>
+          </div>
+          <div class="detail-row">
+            <span class="detail-icon" aria-hidden="true">◉</span>
+            <div><span class="detail-label">HORARIO</span><strong id="eventTime">A confirmar</strong></div>
+          </div>
+          <div class="detail-row">
+            <span class="detail-icon" aria-hidden="true">⌖</span>
+            <div><span class="detail-label">LUGAR</span><strong>Complejo Polideportivo de San Javier</strong><span class="detail-sub">San Javier, Misiones</span></div>
+          </div>
+          <div class="detail-row">
+            <span class="detail-icon" aria-hidden="true">✦</span>
+            <div><span class="detail-label">ORGANIZA</span><strong>GAD</strong></div>
+          </div>
+        </div>
+        <a class="secondary-button map-button" id="mapButton" href="https://www.google.com/maps/search/?api=1&query=Complejo+Polideportivo+San+Javier+Misiones+Argentina" target="_blank" rel="noopener noreferrer">
+          <span aria-hidden="true">⌖</span> CÓMO LLEGAR
+        </a>
+      </section>
+
+      <section class="finale reveal">
+        <div class="finale-glow" aria-hidden="true"></div>
+        <p class="eyebrow">EL MOMENTO QUE ESTÁBAMOS ESPERANDO</p>
+        <h2>ESTO NO SE<br><span>CUENTA. SE VIVE.</span></h2>
+        <p>Vas a sentir la música en el pecho, la emoción en cada movimiento<br>y la energía de una gala que promete ser inolvidable.</p>
+        <button class="primary-button whatsapp-button" id="whatsappButton" type="button">
+          <span class="whatsapp-symbol" aria-hidden="true">↗</span>
+          QUIERO SER PARTE
+        </button>
+        <p class="microcopy">LA MEJOR NOCHE DEL AÑO NOS ESPERA</p>
+      </section>
+
+      <footer class="footer">
+        <div class="footer-line"></div>
+        <p class="footer-logo">GAD<span>.</span></p>
+        <p>GALA DE GIMNASIA AERÓBICA</p>
+        <p class="footer-small">UNA NOCHE ÉPICA · SAN JAVIER, MISIONES</p>
+        <button class="restart-button" id="restartButton" type="button">↺ VOLVER AL INICIO</button>
+      </footer>
+    </section>
+  </main>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="script.js"></script>
+</body>
+</html>
