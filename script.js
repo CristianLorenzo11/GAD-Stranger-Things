@@ -13,7 +13,7 @@
 
 const CONFIG = {
   EVENT_DATE: "20 DE DICIEMBRE ",       // Ejemplo: "Sábado 14 de noviembre de 2026"
-  EVENT_TIME: "20 HS ",       // Ejemplo: "20:30 h"
+  EVENT_TIME: "19 HS ",       // Ejemplo: "20:30 h"
   WHATSAPP_PHONE: "5493755636803"
 };
 
@@ -189,6 +189,15 @@ if (musicaFondo) {
   });
 }
 
+const introLogo = document.getElementById("intro-logo");
+
+if (introLogo) {
+  setTimeout(() => {
+    introLogo.remove();
+  }, 4000);
+}
+
+
 // Iniciar la música si el navegador bloqueó el autoplay.
 document.addEventListener("click", iniciarMusica, {
   once: true
@@ -217,6 +226,7 @@ if (restartButton) {
 if (whatsappButton) {
   whatsappButton.addEventListener("click", confirmByWhatsApp);
 }
+
 
 // ==========================================
 // INICIALIZACIÓN

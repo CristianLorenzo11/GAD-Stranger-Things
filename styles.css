@@ -1099,3 +1099,62 @@ main {
     transition-duration: .01ms !important;
   }
 }
+
+
+/* INTRO CINEMATOGRÁFICA */
+#intro-logo {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #be5757;
+  opacity: 1;
+  visibility: visible;
+  animation: ocultarIntro 1s ease-in forwards;
+  animation-delay: 3s;
+}
+
+#intro-logo img {
+  width: min(65vw, 380px);
+  max-height: 70vh;
+  object-fit: contain;
+  opacity: 0;
+  transform: scale(0.25);
+  animation: zoomLogo 3.8s ease-in-out forwards;
+}
+
+@keyframes zoomLogo {
+  0% {
+    opacity: 0;
+    transform: scale(0.25);
+    filter: brightness(0.5);
+  }
+
+  15% {
+    opacity: 1;
+    transform: scale(0.8);
+    filter: brightness(1.3);
+  }
+
+  65% {
+    opacity: 1;
+    transform: scale(1.3);
+    filter: brightness(1.2);
+  }
+
+  100% {
+    opacity: 0;
+    transform: scale(3.5);
+    filter: brightness(2);
+  }
+}
+
+@keyframes ocultarIntro {
+  to {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+  }
+}
