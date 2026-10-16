@@ -197,6 +197,23 @@ if (introLogo) {
   }, 4000);
 }
 
+const portalButton = document.getElementById("enterButton");
+const handHint = document.querySelector(".game-tap-hint");
+
+function positionPortalHand() {
+  if (!portalButton || !handHint) return;
+
+  const rect = portalButton.getBoundingClientRect();
+
+  handHint.style.left = `${rect.left + rect.width / 2 - 10}px`;
+  handHint.style.top = `${rect.top + rect.height / 2 - 10}px`;
+}
+
+positionPortalHand();
+
+window.addEventListener("resize", positionPortalHand);
+window.addEventListener("scroll", positionPortalHand, { passive: true });
+
 
 // Iniciar la música si el navegador bloqueó el autoplay.
 document.addEventListener("click", iniciarMusica, {
