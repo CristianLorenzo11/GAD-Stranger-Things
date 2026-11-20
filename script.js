@@ -23,6 +23,8 @@ const CONFIG = {
 
 const introScreen = document.getElementById("introScreen");
 const invitation = document.getElementById("invitation");
+const portalVideoScreen = document.getElementById("portalVideoScreen");
+const portalVideo = document.getElementById("portalVideo");
 const enterButton = document.getElementById("enterButton");
 const restartButton = document.getElementById("restartButton");
 const whatsappButton = document.getElementById("whatsappButton");
@@ -65,28 +67,72 @@ function applyEventDetails() {
 }
 
 // ==========================================
-// ENTRADA A LA INVITACIÓN
+// ==========================================
+// ENTRADA AL PORTAL Y REPRODUCCIÓN DEL VIDEO
 // ==========================================
 
 function enterExperience() {
-  if (!enterButton || !introScreen || !invitation) return;
+  if (!enterButton || !introScreen || !portalVideoScreen || !portalVideo) return;
 
   enterButton.disabled = true;
   introScreen.classList.add("glitch");
 
+  // Detener la música de fondo mientras se reproduce el video.
+  if (musicaFondo) {
+    musicaFondo.pause();
+  }
+
   window.setTimeout(() => {
     introScreen.classList.add("hidden");
-    invitation.classList.remove("hidden");
+    portalVideoScreen.classList.remove("hidden");
 
     window.scrollTo({
       top: 0,
       behavior: "instant"
     });
 
-    observeRevealElements();
+    // Comenzar el video desde el principio.
+    portalVideo.currentTime = 0;
+
+    portalVideo.play().catch(() => {
+      showToast("No se pudo reproducir el video. Revisá el archivo portal.mp4.");
+    });
+
   }, 550);
 }
 
+// ==========================================
+// MOSTRAR LA INVITACIÓN AL TERMINAR EL VIDEO
+// ==========================================
+
+function showInvitationAfterVideo() {
+  if (!portalVideoScreen || !invitation) return;
+
+  // Comienza a aparecer la invitación detrás del video
+  invitation.classList.remove("hidden");
+  invitation.classList.add("invitation-transition");
+
+  // El video comienza a desvanecerse
+  portalVideoScreen.classList.add("portal-video-exit");
+
+  // Al terminar la transición, se elimina la pantalla del video
+  window.setTimeout(() => {
+    portalVideoScreen.classList.add("hidden");
+    portalVideoScreen.classList.remove("portal-video-exit");
+    invitation.classList.remove("invitation-transition");
+
+    window.scrollTo({
+      top: 0,
+      behavior: "instant"
+    });
+
+    iniciarMusica();
+    observeRevealElements();
+
+  }, 2500);
+}
+
+// ==========================================
 // ==========================================
 // REINICIAR LA EXPERIENCIA
 // ==========================================
@@ -97,14 +143,22 @@ function restartExperience() {
   invitation.classList.add("hidden");
   introScreen.classList.remove("hidden", "glitch");
 
+  if (portalVideo) {
+    portalVideo.pause();
+    portalVideo.currentTime = 0;
+  }
+
+  if (portalVideoScreen) {
+    portalVideoScreen.classList.add("hidden");
+  }
+
+  enterButton.disabled = false;
+
   window.scrollTo({
     top: 0,
     behavior: "smooth"
   });
-
-  enterButton.disabled = false;
 }
-
 // ==========================================
 // ANIMACIONES DE APARICIÓN
 // ==========================================
@@ -244,6 +298,13 @@ if (whatsappButton) {
   whatsappButton.addEventListener("click", confirmByWhatsApp);
 }
 
+// ==========================================
+// EVENTO: FINALIZACIÓN DEL VIDEO
+// ==========================================
+
+if (portalVideo) {
+  portalVideo.addEventListener("ended", showInvitationAfterVideo);
+}
 
 // ==========================================
 // INICIALIZACIÓN
