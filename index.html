@@ -30,6 +30,12 @@
   <div class="ambient ambient-one" aria-hidden="true"></div>
   <div class="ambient ambient-two" aria-hidden="true"></div>
 
+  <!-- Música de fondo: fuera de la invitación para que nunca se oculte -->
+  <audio id="musica-fondo" loop preload="auto">
+    <source src="./musica.mp3" type="audio/mpeg">
+    Tu navegador no admite audio.
+  </audio>
+
   <main>
     <section class="intro-screen" id="introScreen" aria-labelledby="introTitle">
       <div class="signal">
@@ -81,6 +87,7 @@
     class="portal-video"
     preload="auto"
     playsinline
+    muted
   >
     <source src="./portal.mp4" type="video/mp4">
     Tu navegador no admite la reproducción de video.
@@ -203,10 +210,7 @@
 </button>
         <h3 ">LA MEJOR NOCHE DEL AÑO NOS ESPERA</h3>
       </section>
-<audio id="musica-fondo" loop preload="auto">
-  <source src="./musica.mp3" type="audio/mpeg">
-  Tu navegador no admite audio.
-</audio>
+
       <footer class="footer">
         <div class="footer-line"></div>
         <p class="footer-logo">GAD<span>.</span></p>
